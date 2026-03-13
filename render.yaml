@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: liquor-qr-system
+    name: liquor-qr-system-v2
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
