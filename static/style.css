@@ -1,0 +1,251 @@
+body {
+    background: #f4f6f8;
+}
+
+.login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #f7f7f7, #fff0f0);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+    border: 0;
+    border-radius: 18px;
+}
+
+code {
+    color: #b42318;
+}
+
+.trace-page {
+    min-height: 100vh;
+    background: #c90f02;
+    padding-bottom: 32px;
+}
+
+.trace-header {
+    color: #fff;
+    padding: 20px 18px 10px;
+}
+
+.trace-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.report-title {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.trace-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 18px;
+}
+
+.trace-card {
+    background: #f6f6f6;
+    border-radius: 24px;
+    padding: 22px 22px 26px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    margin-bottom: 22px;
+}
+
+.report-card {
+    position: relative;
+}
+
+.report-time {
+    font-size: 28px;
+    color: #d54757;
+    text-align: center;
+    font-weight: 700;
+    margin: 8px 0 24px;
+}
+
+.stamp {
+    position: absolute;
+    top: 24px;
+    right: 12px;
+    transform: rotate(-12deg);
+    border: 5px solid #d61c1c;
+    color: #d61c1c;
+    border-radius: 14px;
+    padding: 10px 18px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.1;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.info-list {
+    display: grid;
+    gap: 18px;
+}
+
+.info-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    align-items: center;
+    gap: 18px;
+}
+
+.info-label {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2d2d2d;
+}
+
+.info-value {
+    background: #e6aaa4;
+    color: #d54757;
+    border-radius: 999px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 22px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.info-value.multiline {
+    border-radius: 28px;
+    line-height: 1.25;
+    min-height: 92px;
+}
+
+.checklist-card {
+    display: grid;
+    gap: 10px;
+}
+
+.check-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.check-label {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2d2d2d;
+}
+
+.check-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.check-icon.ok {
+    background: #21c77a;
+}
+
+.check-icon.no {
+    background: #d34747;
+}
+
+.meta-card {
+    padding: 16px 22px;
+}
+
+.meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 22px;
+}
+
+.meta-grid div {
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.meta-grid span {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.meta-grid strong {
+    display: block;
+    color: #222;
+    word-break: break-all;
+}
+
+@media (max-width: 768px) {
+    .report-title {
+        font-size: 22px;
+    }
+
+    .trace-card {
+        border-radius: 18px;
+        padding: 18px 16px 20px;
+    }
+
+    .report-time {
+        font-size: 19px;
+        margin-right: 110px;
+    }
+
+    .stamp {
+        top: 14px;
+        right: 8px;
+        border-width: 3px;
+        font-size: 16px;
+        padding: 8px 10px;
+    }
+
+    .info-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .info-label {
+        font-size: 18px;
+    }
+
+    .info-value {
+        min-height: 50px;
+        border-radius: 18px;
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+
+    .info-value.multiline {
+        min-height: 72px;
+    }
+
+    .check-label {
+        font-size: 18px;
+    }
+
+    .check-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 22px;
+    }
+
+    .meta-grid {
+        grid-template-columns: 1fr;
+    }
+}

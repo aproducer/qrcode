@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}酒品溯源详情{% endblock %}
+{% block body %}
+<div class="trace-page">
+    <div class="trace-header">
+        <div class="trace-header-inner">
+            <div class="report-title">鉴别报告</div>
+        </div>
+    </div>
+
+    <div class="trace-container">
+        <section class="trace-card report-card">
+            <div class="report-time">{{ liquor.inspection_time or '-' }}</div>
+            <div class="stamp">{{ liquor.inspection_result or '已通过研判' }}</div>
+
+            <div class="info-list">
+                <div class="info-row"><div class="info-label">生产日期</div><div class="info-value">{{ liquor.production_date or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">出厂日期</div><div class="info-value">{{ liquor.factory_date or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">生成班组</div><div class="info-value">{{ liquor.team_name or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">出厂仓库</div><div class="info-value">{{ (liquor.sales_company ~ ' / ' if liquor.sales_company else '') ~ (liquor.warehouse or '-') }}</div></div>
+                <div class="info-row"><div class="info-label">批次编码</div><div class="info-value">{{ liquor.batch_code or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">酒类名称</div><div class="info-value multiline">{{ liquor.name or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">酒类规格</div><div class="info-value">{{ liquor.spec or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">酒精度数</div><div class="info-value">{{ liquor.abv or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">经销商</div><div class="info-value multiline">{{ liquor.dealer or '-' }}</div></div>
+                <div class="info-row"><div class="info-label">鉴定次数</div><div class="info-value">{{ liquor.inspection_count or 0 }}</div></div>
+            </div>
+        </section>
+
+        <section class="trace-card checklist-card">
+            {% for field_name, field_label in check_fields %}
+            <div class="check-row">
+                <div class="check-label">{{ field_label }}</div>
+                <div class="check-icon {% if liquor[field_name] %}ok{% else %}no{% endif %}">
+                    {% if liquor[field_name] %}✓{% else %}✕{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section class="trace-card meta-card">
+            <div class="meta-grid">
+                <div><span>追溯码</span><strong>{{ liquor.trace_code }}</strong></div>
+                <div><span>扫码次数</span><strong>{{ liquor.scan_count }}</strong></div>
+                <div><span>最后扫码时间</span><strong>{{ liquor.last_scan_at or '-' }}</strong></div>
+                <div><span>状态</span><strong>{{ liquor.status }}</strong></div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

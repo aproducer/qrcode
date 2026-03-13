@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}{{ '新增酒品' if action == 'new' else '编辑酒品' }}{% endblock %}
+{% block body %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <div>
+            <h1 class="h3 mb-1">{{ '新增酒品' if action == 'new' else '编辑酒品' }}</h1>
+            <div class="text-secondary">录入基础信息、鉴别结果与逐项校验状态。</div>
+        </div>
+        <a class="btn btn-outline-secondary" href="{{ url_for('admin_list') }}">返回列表</a>
+    </div>
+
+    <form method="post" class="card shadow-sm">
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">酒类名称</label>
+                    <input class="form-control" name="name" required value="{{ liquor.name if liquor else '' }}">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">酒类规格</label>
+                    <input class="form-control" name="spec" value="{{ liquor.spec if liquor else '' }}" placeholder="500ml">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">酒精度数</label>
+                    <input class="form-control" name="abv" value="{{ liquor.abv if liquor else '' }}" placeholder="53">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">生产日期</label>
+                    <input class="form-control" name="production_date" value="{{ liquor.production_date if liquor else '' }}" placeholder="2020-06-09">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">出厂日期</label>
+                    <input class="form-control" name="factory_date" value="{{ liquor.factory_date if liquor else '' }}" placeholder="2020-06-18 20:48:54">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">生成班组</label>
+                    <input class="form-control" name="team_name" value="{{ liquor.team_name if liquor else '' }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">出厂仓库</label>
+                    <input class="form-control" name="warehouse" value="{{ liquor.warehouse if liquor else '' }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">批次编码</label>
+                    <input class="form-control" name="batch_code" value="{{ liquor.batch_code if liquor else '' }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">经销商</label>
+                    <input class="form-control" name="dealer" value="{{ liquor.dealer if liquor else '' }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">销售公司</label>
+                    <input class="form-control" name="sales_company" value="{{ liquor.sales_company if liquor else '' }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">销售渠道</label>
+                    <input class="form-control" name="sales_channel" value="{{ liquor.sales_channel if liquor else '' }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">鉴别报告时间</label>
+                    <input class="form-control" name="inspection_time" value="{{ liquor.inspection_time if liquor else '' }}" placeholder="2022-06-09 16:34:38">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">鉴别结论</label>
+                    <input class="form-control" name="inspection_result" value="{{ liquor.inspection_result if liquor else '已通过研判' }}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">鉴定次数</label>
+                    <input class="form-control" name="inspection_count" type="number" min="0" value="{{ liquor.inspection_count if liquor else 0 }}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">扫码次数</label>
+                    <input class="form-control" name="scan_count" type="number" min="0" value="{{ liquor.scan_count if liquor else 0 }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">最后扫码时间</label>
+                    <input class="form-control" name="last_scan_at" value="{{ liquor.last_scan_at if liquor else '' }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">状态</label>
+                    <select class="form-select" name="status">
+                        {% set current_status = liquor.status if liquor else '正常' %}
+                        {% for item in ['正常', '冻结', '作废'] %}
+                            <option value="{{ item }}" {% if item == current_status %}selected{% endif %}>{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <h2 class="h5 mb-3">校验项</h2>
+            <div class="row g-2">
+                {% for field_name, field_label in check_fields %}
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-check border rounded px-3 py-2 bg-light">
+                        <input class="form-check-input" type="checkbox" id="{{ field_name }}" name="{{ field_name }}"
+                               {% if liquor %}{% if liquor[field_name] %}checked{% endif %}{% else %}checked{% endif %}>
+                        <label class="form-check-label" for="{{ field_name }}">{{ field_label }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-footer bg-white p-3 d-flex gap-2 justify-content-end">
+            <a class="btn btn-outline-secondary" href="{{ url_for('admin_list') }}">取消</a>
+            <button class="btn btn-danger">保存</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

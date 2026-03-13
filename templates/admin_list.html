@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}酒品列表{% endblock %}
+{% block body %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <div>
+            <h1 class="h3 mb-1">酒品管理</h1>
+            <div class="text-secondary">支持增删改查、一瓶一码二维码访问和公网详情页展示。</div>
+        </div>
+        <div class="d-flex gap-2">
+            <a class="btn btn-danger" href="{{ url_for('admin_new') }}">新增酒品</a>
+            <form method="post" action="{{ url_for('admin_logout') }}">
+                <button class="btn btn-outline-secondary">退出</button>
+            </form>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form class="card card-body shadow-sm mb-3" method="get">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-8">
+                <label class="form-label">搜索</label>
+                <input class="form-control" name="q" value="{{ q }}" placeholder="追溯码 / 酒类名称 / 批次编码 / 经销商">
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button class="btn btn-dark flex-fill">查询</button>
+                <a class="btn btn-outline-secondary" href="{{ url_for('admin_list') }}">重置</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>追溯码</th>
+                        <th>酒类名称</th>
+                        <th>批次编码</th>
+                        <th>经销商</th>
+                        <th>扫码次数</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for liquor in liquors %}
+                    <tr>
+                        <td>{{ liquor.id }}</td>
+                        <td><code>{{ liquor.trace_code }}</code></td>
+                        <td>{{ liquor.name }}</td>
+                        <td>{{ liquor.batch_code or '-' }}</td>
+                        <td>{{ liquor.dealer or '-' }}</td>
+                        <td>{{ liquor.scan_count }}</td>
+                        <td>
+                            <span class="badge {% if liquor.status == '正常' %}text-bg-success{% elif liquor.status == '冻结' %}text-bg-warning{% else %}text-bg-secondary{% endif %}">
+                                {{ liquor.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('trace_page', trace_code=liquor.trace_code) }}" target="_blank">详情</a>
+                                <a class="btn btn-sm btn-outline-dark" href="{{ url_for('qrcode_image', trace_code=liquor.trace_code) }}" target="_blank">二维码</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('admin_edit', liquor_id=liquor.id) }}">编辑</a>
+                                <form method="post" action="{{ url_for('admin_delete', liquor_id=liquor.id) }}" onsubmit="return confirm('确认删除这条记录吗？');">
+                                    <button class="btn btn-sm btn-outline-danger">删除</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center py-4 text-secondary">暂无数据。</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
