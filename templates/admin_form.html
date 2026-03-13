@@ -19,20 +19,20 @@
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">酒类规格</label>
-                    <input class="form-control" name="spec" value="{{ liquor.spec if liquor else '' }}" placeholder="500ml">
+                    <input class="form-control" name="spec" value="{{ liquor.spec if liquor else '' }}" >
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">酒精度数</label>
-                    <input class="form-control" name="abv" value="{{ liquor.abv if liquor else '' }}" placeholder="53">
+                    <input class="form-control" name="abv" value="{{ liquor.abv if liquor else '' }}" >
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label">生产日期</label>
-                    <input class="form-control" name="production_date" value="{{ liquor.production_date if liquor else '' }}" placeholder="2020-06-09">
+                    <input class="form-control" name="production_date" value="{{ liquor.production_date if liquor else '' }}" >
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">出厂日期</label>
-                    <input class="form-control" name="factory_date" value="{{ liquor.factory_date if liquor else '' }}" placeholder="2020-06-18 20:48:54">
+                    <input class="form-control" name="factory_date" value="{{ liquor.factory_date if liquor else '' }}">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">生成班组</label>
@@ -63,7 +63,7 @@
 
                 <div class="col-md-4">
                     <label class="form-label">鉴别报告时间</label>
-                    <input class="form-control" name="inspection_time" value="{{ liquor.inspection_time if liquor else '' }}" placeholder="2022-06-09 16:34:38">
+                    <input class="form-control" name="inspection_time" value="{{ liquor.inspection_time if liquor else '' }}" >
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">鉴别结论</label>
