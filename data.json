@@ -1,0 +1,26 @@
+{
+  "site_name": "公网数据展示系统",
+  "updated_at": "2026-03-13 12:00:00 UTC",
+  "devices": [
+    {
+      "device_id": "SYS-001",
+      "name": "主机柜 1",
+      "status": "running",
+      "temperature": 36.5,
+      "humidity": 58,
+      "voltage": 220.4,
+      "current": 1.82,
+      "message": "运行正常"
+    },
+    {
+      "device_id": "SYS-002",
+      "name": "主机柜 2",
+      "status": "warning",
+      "temperature": 42.1,
+      "humidity": 61,
+      "voltage": 219.8,
+      "current": 2.06,
+      "message": "温度偏高，请检查散热"
+    }
+  ]
+}
